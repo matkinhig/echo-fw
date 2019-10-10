@@ -1,0 +1,8 @@
+MongoDB :
+  Host : localhost
+  User : mongoadmin
+  Password : secret
+  Port : 1121
+
+Encrypt : 
+  Secret : my-secret
