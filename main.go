@@ -8,6 +8,7 @@ import (
 
 	"github.com/leekchan/accounting"
 	"github.com/matkinhig/echo-fw/config"
+	"github.com/matkinhig/echo-fw/services"
 
 	"net/http"
 
@@ -39,8 +40,16 @@ func main() {
 	fmt.Println(ac.FormatMoney(123456789.213123))
 
 	fmt.Println("The Config value:", config.Config)
-	testServer()
+	// testServer()
 	// connectORACLE()
+	crudService()
+}
+
+func crudService() {
+	e := echo.New()
+
+	//Route
+	e.POST("/student", service.CreateStudent)
 }
 
 func testServer() {
