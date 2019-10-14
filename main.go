@@ -8,7 +8,8 @@ import (
 
 	"github.com/leekchan/accounting"
 	"github.com/matkinhig/echo-fw/config"
-	"github.com/matkinhig/echo-fw/services"
+	"github.com/matkinhig/echo-fw/route"
+	service "github.com/matkinhig/echo-fw/services"
 
 	"net/http"
 
@@ -36,6 +37,8 @@ type Student struct {
 func main() {
 	fmt.Println("start golang")
 
+	route.Public()
+
 	ac := accounting.Accounting{Symbol: "$", Precision: 2}
 	fmt.Println(ac.FormatMoney(123456789.213123))
 
@@ -50,6 +53,11 @@ func crudService() {
 
 	//Route
 	e.POST("/student", service.CreateStudent)
+	e.GET("/student/:id", service.GetStudent)
+	e.PUT("/student/:id", service.UpdateStudent)
+	e.DELETE("/student/:id", service.DeleteUser)
+
+	e.Logger.Fatal(e.Start(":8000"))
 }
 
 func testServer() {
