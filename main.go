@@ -9,7 +9,7 @@ import (
 	"github.com/leekchan/accounting"
 	"github.com/matkinhig/echo-fw/config"
 	"github.com/matkinhig/echo-fw/route"
-	service "github.com/matkinhig/echo-fw/services"
+	"github.com/matkinhig/echo-fw/services"
 
 	"net/http"
 
@@ -36,8 +36,8 @@ type Student struct {
 
 func main() {
 	fmt.Println("start golang")
-
-	route.Public()
+	e := echo.New()
+	route.Public(e)
 
 	ac := accounting.Accounting{Symbol: "$", Precision: 2}
 	fmt.Println(ac.FormatMoney(123456789.213123))
@@ -45,17 +45,19 @@ func main() {
 	fmt.Println("The Config value:", config.Config)
 	// testServer()
 	// connectORACLE()
-	crudService()
+	// crudService()
+	// e.Logger.Fatal(e.Start(":8000"))
+	e.Logger.Fatal(e.Start(":8000"))
 }
 
 func crudService() {
 	e := echo.New()
 
 	//Route
-	e.POST("/student", service.CreateStudent)
-	e.GET("/student/:id", service.GetStudent)
-	e.PUT("/student/:id", service.UpdateStudent)
-	e.DELETE("/student/:id", service.DeleteUser)
+	e.POST("/student", services.CreateStudent)
+	e.GET("/student/:id", services.GetStudent)
+	e.PUT("/student/:id", services.UpdateStudent)
+	e.DELETE("/student/:id", services.DeleteUser)
 
 	e.Logger.Fatal(e.Start(":8000"))
 }
