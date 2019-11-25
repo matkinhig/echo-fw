@@ -8,6 +8,7 @@ import (
 
 	"github.com/leekchan/accounting"
 	"github.com/matkinhig/echo-fw/config"
+	"github.com/matkinhig/echo-fw/db"
 	"github.com/matkinhig/echo-fw/route"
 	"github.com/matkinhig/echo-fw/services"
 
@@ -36,6 +37,8 @@ type Student struct {
 
 func main() {
 	fmt.Println("start golang")
+	fmt.Println(db.Client)
+
 	e := echo.New()
 	route.Public(e)
 
